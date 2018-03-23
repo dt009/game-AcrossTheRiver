@@ -32,8 +32,8 @@ Enemy.prototype.render = function () {
 // 这个类需要一个 update() 函数， render() 函数和一个 handleInput()函数
 
 var Player = function () {
-    this.x = 0;
-    this.y = 0;
+    this.x = 200;
+    this.y = 400;
 
     this.sprite = 'images/char-boy.png';
 };
@@ -82,6 +82,11 @@ Player.prototype.handleInput = function (keyCode) {
             }
             break;
     }
+
+    if (this.y <= 0) {
+        alert('完成');
+        this.y = 400;
+    }
 };
 
 
@@ -91,6 +96,14 @@ Player.prototype.handleInput = function (keyCode) {
 var allEnemies = [new Enemy(0), new Enemy(1), new Enemy(2), new Enemy(3)];
 var player = new Player();
 
+
+function checkCollisions() {
+    allEnemies.forEach(function (enemy) {
+        if (enemy.x - player.x < 20 && enemy.x - player.x > -80 && enemy.y === player.y) {
+            player = new Player();
+        }
+    });
+}
 
 // 这段代码监听游戏玩家的键盘点击事件并且代表将按键的关键数字送到 Player.handleInput()
 // 方法里面。你不需要再更改这段代码了。
