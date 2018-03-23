@@ -78,6 +78,16 @@ var Engine = (function(global) {
         player.update();
     }
 
+    /*
+    * 这个函数 就是 enemy和 player 碰撞处理
+    * */
+
+    function checkCollisions() {
+        allEnemies.forEach(function(enemy) {
+            enemy.checkCollisions(player);
+        });
+    }
+
     /* 这个函数做了一些游戏的初始渲染，然后调用 renderEntities 函数。记住，这个函数
      * 在每个游戏的时间间隙都会被调用一次（或者说游戏引擎的每个循环），因为这就是游戏
      * 怎么工作的，他们就像是那种每一页上都画着不同画儿的书，快速翻动的时候就会出现是
